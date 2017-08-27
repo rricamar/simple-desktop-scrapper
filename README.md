@@ -1,1 +1,1 @@
-# -simple-desktop-scrapper
+# simple-desktop-scrapper
