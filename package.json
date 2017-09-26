@@ -4,7 +4,10 @@
   "description": "Download Simple Desktop wallpapers on given dir",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "prestart": "npm run clean",
+    "start": "node index.js",
+    "test": "npm test",
+    "clean": "rm ./images/*.png || true"
   },
   "author": "rricamar",
   "license": "ISC",
