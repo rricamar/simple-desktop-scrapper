@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const request = require('request');
+const request = require('request-promise-native');
 const cheerio = require('cheerio');
 const chalk = require('chalk');
 const uid = require('uid');
@@ -14,35 +14,33 @@ class Scrapper {
     this.urlHelper = new UrlHelper();
   }
 
-  start() {
+  async start() {
     log(chalk.blue('Starting...'));
-    return this
-      .get(this.urlHelper.browseUrl)
-      .then((body) => {
-        const html = this.parse(body);
-        const images = this.getImages(html);
-        log(chalk.blue(`There are ${images.length} images on this page ...`));
-        Promise.all(images.map((imageUrl) => {
-          return this.get(imageUrl, {
-            encoding: 'binary'
-          }).then((image) => {
-            const filename = uid(20) + '.png';
-            this.save(filename, image);
-          });
-        }));
-      })
-      .catch(this.onError)
+    const body = await this.get(this.urlHelper.browseUrl);
+    const html = this.parse(body);
+    const imagesUrls = this.getImages(html);
+    const binary = {
+      encoding: 'binary'
+    };
+    const rawImages = [];
+    for (var i = 0; i < imagesUrls.length; i++) {
+      const imageUrl = imagesUrls[i];
+      const fixedImageUrl = this.urlHelper.sanitizeImageUrl(imageUrl);
+      const image = await this.get(fixedImageUrl, binary);
+      const filename = uid(20) + '.png';
+      this.save(filename, image);
+    }
   }
 
-  get(url, options = {}) {
+  async get(url, options = {}) {
     log(chalk.blue(`Getting ${url} ...`));
-    return new Promise((resolve, reject) => {
-      request(url, options, (error, response, body) => {
-        if (error) return reject(error);
-        log(chalk.blue(`... done!`));
-        return resolve(body);
-      });
-    });
+    try {
+      const body = await request(url, options);
+      log(chalk.blue(`... done!`));
+      return body;
+    } catch (err) {
+      this.onError(err);
+    }
   }
 
   parse(html) {
@@ -50,9 +48,11 @@ class Scrapper {
   }
 
   save(filename, content) {
+    const dir = './images';
+    const base = filename;
     const pathFile = path.format({
-      dir: './images',
-      base: filename
+      dir,
+      base
     });
     log(chalk.green(`Saving ${pathFile} ...`));
     try {
@@ -70,7 +70,7 @@ class Scrapper {
   }
 
   onError(err) {
-    chalk.red(err);
+    log(chalk.red(err));
   }
 }
 
