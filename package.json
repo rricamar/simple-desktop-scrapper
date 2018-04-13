@@ -1,21 +1,21 @@
 {
-  "name": "simple-desktop-scrapper",
-  "version": "1.0.0",
-  "description": "Download Simple Desktop wallpapers on given dir",
-  "main": "index.js",
-  "scripts": {
-    "prestart": "npm run clean",
-    "start": "node index.js",
-    "test": "npm test",
-    "clean": "rm ./images/*.png || true"
-  },
-  "author": "rricamar",
-  "license": "ISC",
-  "dependencies": {
-    "chalk": "^2.0.1",
-    "cheerio": "^1.0.0-rc.2",
-    "request": "^2.81.0",
-    "request-promise-native": "^1.0.5",
-    "uid": "0.0.2"
-  }
+    "name": "simple-desktop-scrapper",
+    "version": "1.0.0",
+    "description": "Download Simple Desktop wallpapers on given dir",
+    "main": "index.js",
+    "scripts": {
+        "prestart": "npm run clean",
+        "start": "node index.js",
+        "test": "npm test",
+        "clean": "rm ./images/*.png || true"
+    },
+    "author": "rricamar",
+    "license": "ISC",
+    "dependencies": {
+        "chalk": "^2.0.1",
+        "cheerio": "^1.0.0-rc.2",
+        "request": "^2.81.0",
+        "request-promise-native": "^1.0.5",
+        "uid": "0.0.2"
+    }
 }
