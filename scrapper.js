@@ -1,11 +1,11 @@
-const fs = require("fs");
-const path = require("path");
-const request = require("request-promise-native");
-const cheerio = require("cheerio");
-const chalk = require("chalk");
-const uid = require("uid");
+const fs = require('fs');
+const path = require('path');
+const request = require('request-promise-native');
+const cheerio = require('cheerio');
+const chalk = require('chalk');
+const uid = require('uid');
 const log = console.log;
-const UrlHelper = require("./url");
+const UrlHelper = require('./url');
 
 class Scrapper {
   constructor() {
@@ -15,12 +15,12 @@ class Scrapper {
   }
 
   async start() {
-    log(chalk.blue("Starting..."));
+    log(chalk.blue('Starting...'));
     const body = await this.get(this.urlHelper.browseUrl);
     const html = this.parse(body);
     const imagesUrls = this.getImages(html);
     const binary = {
-      encoding: "binary"
+      encoding: 'binary'
     };
 
     const rawImages = [];
@@ -29,7 +29,7 @@ class Scrapper {
       const imageUrl = imagesUrls[i];
       const fixedImageUrl = this.urlHelper.sanitizeImageUrl(imageUrl);
       const image = await this.get(fixedImageUrl, binary);
-      const filename = uid(20) + ".png";
+      const filename = uid(20) + '.png';
       this.save(filename, image);
     }
   }
@@ -51,7 +51,7 @@ class Scrapper {
   }
 
   save(filename, content) {
-    const dir = "./images";
+    const dir = './images';
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir);
     }
@@ -64,7 +64,7 @@ class Scrapper {
     log(chalk.green(`Saving ${pathFile} ...`));
 
     try {
-      fs.writeFileSync(pathFile, content, "binary");
+      fs.writeFileSync(pathFile, content, 'binary');
       log(chalk.green(`... done!`));
     } catch (err) {
       this.onError(err);
@@ -72,7 +72,7 @@ class Scrapper {
   }
 
   getImages(html) {
-    const images = html("body .container .desktop img");
+    const images = html('body .container .desktop img');
     const imagesUrls = images.map((index, elem) => elem.attribs.src).toArray();
     return imagesUrls;
   }

@@ -1,4 +1,4 @@
-const Scrapper = require("./scrapper");
+const Scrapper = require('./scrapper');
 const scrapper = new Scrapper();
 
 (async () => {

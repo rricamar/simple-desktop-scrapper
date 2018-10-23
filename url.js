@@ -1,4 +1,4 @@
-const CONFIG = require("./config");
+const CONFIG = require('./config');
 
 class UrlHelper {
   get mainUrl() {
@@ -10,7 +10,7 @@ class UrlHelper {
   }
 
   sanitizeImageUrl(url) {
-    const fullSizeUrl = url.split(".png")[0];
+    const fullSizeUrl = url.split('.png')[0];
     const fullSizeUrlWithExtension = `${fullSizeUrl}.png`;
     return fullSizeUrlWithExtension;
   }
