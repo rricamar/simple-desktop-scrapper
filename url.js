@@ -1,9 +1,6 @@
 const CONFIG = require('./config');
 
 class UrlHelper {
-    constructor() {
-    }
-
     get mainUrl() {
         return CONFIG.URL;
     }

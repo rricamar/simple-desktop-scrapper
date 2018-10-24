@@ -52,6 +52,9 @@ class Scrapper {
 
     save(filename, content) {
         const dir = './images';
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir);
+        }
         const base = filename;
         const pathFile = path.format({
             dir,
@@ -70,7 +73,9 @@ class Scrapper {
 
     getImages(html) {
         const images = html('body .container .desktop img');
-        const imagesUrls = images.map((index, elem) => elem.attribs.src).toArray();
+        const imagesUrls = images
+            .map((index, elem) => elem.attribs.src)
+            .toArray();
         return imagesUrls;
     }
 
