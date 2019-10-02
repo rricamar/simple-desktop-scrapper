@@ -1,4 +1,4 @@
 module.exports = {
-    URL: 'http://simpledesktops.com',
-    BROWSE: 'browse'
-};
+    URL: "http://simpledesktops.com",
+    BROWSE: "browse"
+}

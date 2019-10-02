@@ -7,7 +7,9 @@
         "prestart": "npm run clean",
         "start": "node index.js",
         "test": "npm test",
-        "clean": "rm ./images/*.png || true"
+        "clean": "rm ./images/*.png || true",
+        "eslint": "npx eslint .",
+        "eslint:fix": "npx eslint --fix ."
     },
     "author": "Ruben Rica (r.ricamarti@gmail.com)",
     "license": "ISC",
@@ -17,5 +19,8 @@
         "request": "2.88.0",
         "request-promise-native": "1.0.7",
         "uid": "0.0.2"
+    },
+    "devDependencies": {
+        "eslint": "^6.5.1"
     }
 }
