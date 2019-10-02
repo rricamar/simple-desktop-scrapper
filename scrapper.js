@@ -7,12 +7,15 @@ const uid = require("uid")
 const log = console.log
 const UrlHelper = require("./url")
 
+
 class Scrapper {
+
     constructor() {
         this.request = request
         this.cheerio = cheerio
         this.urlHelper = new UrlHelper()
     }
+
 
     async start() {
         log(chalk.blue("Starting..."))
@@ -33,6 +36,7 @@ class Scrapper {
         }
     }
 
+
     async get(url, options = {}) {
         log(chalk.blue(`Getting ${url} ...`))
 
@@ -45,9 +49,11 @@ class Scrapper {
         }
     }
 
+
     parse(html) {
         return this.cheerio.load(html)
     }
+
 
     save(filename, content) {
         const dir = "./images"
@@ -68,6 +74,7 @@ class Scrapper {
         }
     }
 
+
     getImages(html) {
         const images = html("body .container .desktop img")
         const imagesUrls = images
@@ -76,9 +83,11 @@ class Scrapper {
         return imagesUrls
     }
 
+
     onError(err) {
         log(chalk.red(err))
     }
+
 }
 
 module.exports = Scrapper
