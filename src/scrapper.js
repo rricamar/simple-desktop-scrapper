@@ -29,7 +29,7 @@ class Scrapper {
 
         for (var i = 0; i < imagesUrls.length; i++) {
             const imageUrl = imagesUrls[i]
-            const fixedImageUrl = this.urlHelper.sanitizeImageUrl(imageUrl)
+            const fixedImageUrl = this.urlHelper.getFullResImageUrl(imageUrl)
             const image = await this.get(fixedImageUrl, binary)
             const filename = uid(20) + ".png"
             this.save(filename, image)

@@ -13,7 +13,7 @@ class UrlHelper {
     }
 
 
-    sanitizeImageUrl(url) {
+    getFullResImageUrl(url) {
         const fullSizeUrl = url.split(".png")[0]
         const fullSizeUrlWithExtension = `${fullSizeUrl}.png`
         return fullSizeUrlWithExtension
