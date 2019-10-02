@@ -6,7 +6,7 @@
     "scripts": {
         "prestart": "npm run clean",
         "start": "node index.js",
-        "test": "npm test",
+        "test": "jest",
         "clean": "rm ./images/*.png || true",
         "eslint": "npx eslint .",
         "eslint:fix": "npx eslint --fix ."
@@ -21,6 +21,9 @@
         "uid": "0.0.2"
     },
     "devDependencies": {
-        "eslint": "^6.5.1"
+        "@types/jest": "^24.0.18",
+        "eslint": "^6.5.1",
+        "eslint-plugin-jest": "^22.17.0",
+        "jest": "^24.9.0"
     }
 }
