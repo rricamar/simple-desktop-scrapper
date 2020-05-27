@@ -7,7 +7,7 @@
         "prestart": "npm run clean",
         "start": "node index.js",
         "test": "jest",
-        "clean": "rm ./images/*.png || true",
+        "clean": "rm -rf images && mkdir images  || true",
         "eslint": "npx eslint .",
         "eslint:fix": "npx eslint --fix ."
     },
