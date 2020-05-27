@@ -14,9 +14,10 @@ class UrlHelper {
 
 
     getFullResImageUrl(url) {
-        const fullSizeUrl = url.split(".png")[0]
-        const fullSizeUrlWithExtension = `${fullSizeUrl}.png`
-        return fullSizeUrlWithExtension
+        const extension = url.includes(".jpg") ? ".jpg" : ".png"
+        const fullSizeUrl = url.split(extension)[0]
+        const fullSizeUrlWithExtension = `${fullSizeUrl}${extension}`
+        return { fullSizeUrlWithExtension, extension }
     }
 
 }

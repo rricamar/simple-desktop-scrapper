@@ -11,8 +11,6 @@ const UrlHelper = require("./url")
 class Scrapper {
 
     constructor() {
-        this.request = request
-        this.cheerio = cheerio
         this.urlHelper = new UrlHelper()
     }
 
@@ -30,8 +28,8 @@ class Scrapper {
         for (var i = 0; i < imagesUrls.length; i++) {
             const imageUrl = imagesUrls[i]
             const fixedImageUrl = this.urlHelper.getFullResImageUrl(imageUrl)
-            const image = await this.get(fixedImageUrl, binary)
-            const filename = uid(20) + ".png"
+            const image = await this.get(fixedImageUrl.fullSizeUrlWithExtension, binary)
+            const filename = uid(20) + fixedImageUrl.extension
             this.save(filename, image)
         }
     }
@@ -51,7 +49,7 @@ class Scrapper {
 
 
     parse(html) {
-        return this.cheerio.load(html)
+        return cheerio.load(html)
     }
 
 
